@@ -10,6 +10,9 @@ it('add todo', () => {
 
   cy.contains('[data-test=todo-item]', 'buy milk')
     .should('be.visible')
+
+  cy.get('input[type=checkbox]')
+    .should('not.be.checked')
   
 });
 
