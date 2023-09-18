@@ -1,36 +1,30 @@
-name: Playwright Tests
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+name: E2E tests (on deployment status)
+on: deployment_status
+
 jobs:
   test:
-    timeout-minutes: 60
     runs-on: ubuntu-latest
+    if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success'
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
-      with:
-        node-version: 18
-    - name: Install dependencies
-      run: npm ci
-    - uses: patrickedqvist/wait-for-vercel-preview@v1.2.0
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        max_timeout: 960
-        check_interval: 60
-        environment: ${{ fromJSON('["", "production"]')[github.ref == 'refs/heads/main'] }}
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
-    - name: Run Playwright tests
-      run: npx playwright test 
-      env:
-        CI: true
-        BASE_URL: ${{ github.event.deployment_status.target_url }}
-    - uses: actions/upload-artifact@v3
-      if: always()
-      with:
-        name: playwright-report
-        path: playwright-report/
-        retention-days: 30
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - run: echo ${{ github.event.deployment_status.target_url }}
+
+      - name: Run Playwright tests
+        run: npx playwright test
+        env:
+          BASE_URL: ${{ github.event.deployment_status.target_url }}
+
+      - name: Upload replays
+        if: ${{ always() }}
+        uses: replayio/action-upload@v0.5.1
+        with:
+          public: true
+          api-key: rwk_luzmAGEZVoZdMLqFVeYoFZhhpFsR9ImnMH9tEb7v9zo
