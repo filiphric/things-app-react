@@ -1,0 +1,30 @@
+name: E2E tests (on deployment status)
+on: deployment_status
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success'
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - run: echo ${{ github.event.deployment_status.target_url }}
+
+      - name: Run Playwright tests
+        run: npx playwright test
+        env:
+          BASE_URL: ${{ github.event.deployment_status.target_url }}
+
+      - name: Upload replays
+        if: ${{ always() }}
+        uses: replayio/action-upload@v0.5.1
+        with:
+          public: true
+          api-key: rwk_luzmAGEZVoZdMLqFVeYoFZhhpFsR9ImnMH9tEb7v9zo
