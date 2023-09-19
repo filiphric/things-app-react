@@ -18,7 +18,7 @@ jobs:
       - run: echo ${{ github.event.deployment_status.target_url }}
 
       - name: Run Playwright tests
-        run: npx playwright test
+        run: npx playwright test --project replay-chromium --reporter=@replayio/playwright/reporter,line
         env:
           BASE_URL: ${{ github.event.deployment_status.target_url }}
 

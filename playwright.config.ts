@@ -1,4 +1,5 @@
 import { defineConfig, devices } from "@playwright/test";
+import { devices as replayDevices } from "@replayio/playwright";
 
 const { CI, BASE_URL } = process.env;
 
@@ -47,6 +48,11 @@ export default defineConfig({
     {
       name: "webkit",
       use: { ...devices["Desktop Safari"] },
+    },
+
+    {
+      name: "replay-chromium",
+      use: { ...replayDevices["Replay Chromium"] },
     },
 
     /* Test against mobile viewports. */
