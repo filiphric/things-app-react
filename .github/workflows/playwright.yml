@@ -1,4 +1,4 @@
-name: E2E tests (on deployment status)
+name: E2E tests (playwright)
 on: deployment_status
 
 jobs:
