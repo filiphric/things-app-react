@@ -1,4 +1,4 @@
-name: E2E tests (playwright)
+name: E2E tests (cypress)
 on: [deployment_status]
 jobs:
   cypress-run:
