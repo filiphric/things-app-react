@@ -27,4 +27,4 @@ jobs:
         uses: replayio/action-upload@v0.5.1
         with:
           public: true
-          api-key: rwk_luzmAGEZVoZdMLqFVeYoFZhhpFsR9ImnMH9tEb7v9zo
+          api-key: ${{ secrets.RECORD_REPLAY_API_KEY }}
