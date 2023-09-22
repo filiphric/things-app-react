@@ -1,10 +1,12 @@
-name: E2E tests (on deployment status)
+name: E2E tests (playwright)
 on: deployment_status
-
 jobs:
   test:
     runs-on: ubuntu-latest
     if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success'
+    env:
+      POSTGRES_URL_NON_POOLING: ${{ secrets.POSTGRES_URL_NON_POOLING }} # Added environment variable
+      POSTGRES_PRISMA_URL: ${{ secrets.POSTGRES_PRISMA_URL }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -14,17 +16,14 @@ jobs:
         run: npm ci
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
-
       - run: echo ${{ github.event.deployment_status.target_url }}
-
       - name: Run Playwright tests
         run: npx playwright test --project replay-chromium --reporter=@replayio/playwright/reporter,line
         env:
           BASE_URL: ${{ github.event.deployment_status.target_url }}
-
       - name: Upload replays
         if: ${{ always() }}
         uses: replayio/action-upload@v0.5.1
         with:
           public: true
-          api-key: rwk_luzmAGEZVoZdMLqFVeYoFZhhpFsR9ImnMH9tEb7v9zo
+          api-key: ${{ secrets.RECORD_REPLAY_API_KEY }}

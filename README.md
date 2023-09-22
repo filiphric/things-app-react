@@ -16,8 +16,8 @@ into your terminal.
 ## Why I made this
 I wanted to get a deeper look into capabilities of Replay.io - a debugging tool that records everything that happens in your application when you interact with it. It plays really well with React and state management tools like jotai. To learn more Replay.io make sure to [visit the homepage](https://www.replay.io/).
 
-## Cypress & Replay.io
-Besides recording everything in the browser, you can create recordings by simply running your tests with GitHub Actions. Take a look into [workflow file](.github/workflows/replay.yml) to find out more or [checkout Replay.io](https://docs.replay.io/test-suites/cypress) docs for a full tutorial.
+## Cypress, Playwright & Replay.io
+Besides recording everything in the browser, you can create recordings by simply running your tests with GitHub Actions. Take a look into [cypress](.github/workflows/cypress.yml) and [playwright](.github/workflows/playwright.yml) to find out more or [checkout Replay.io](https://docs.replay.io/test-suites/cypress) docs for a full tutorial.
 
 ## Take a look into Replay.io yourself
 To experience how Replay.io can help you with debugging, download Replay.io browser, open your app and hit record. [Add your first print statement](https://docs.replay.io/debugging#e52695c558884780a93be039ae42867a) to the recording and be blown away 💥

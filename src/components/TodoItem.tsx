@@ -73,7 +73,6 @@ export const TodoItem: React.FC<Props> = ({ todo, deleteTodo }) => {
             className={`text-gray-800 text-lg flex-grow ${
               todo.completed ? "line-through	" : ""
             }`}
-            data-test="todo-item"
             onClick={handleEdit}
           >
             {todo.title}
