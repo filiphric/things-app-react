@@ -4,6 +4,9 @@ jobs:
   cypress-run:
     if: github.event.deployment_status.state == 'success'
     runs-on: ubuntu-latest
+    env:
+      POSTGRES_URL_NON_POOLING: ${{ secrets.POSTGRES_URL_NON_POOLING }} # Added environment variable
+      POSTGRES_PRISMA_URL: ${{ secrets.POSTGRES_PRISMA_URL }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -14,7 +17,6 @@ jobs:
           start: npm run dev
         env:
           CYPRESS_BASE_URL: ${{ github.event.deployment_status.target_url }}
-          POSTGRES_PRISMA_URL: ${{ secrets.POSTGRES_PRISMA_URL }}
       - name: Upload replays
         if: always()
         uses: replayio/action-upload@v0.5.1
