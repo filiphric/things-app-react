@@ -21,6 +21,7 @@ jobs:
         run: npx playwright test --project replay-chromium --reporter=@replayio/playwright/reporter,line
         env:
           BASE_URL: ${{ github.event.deployment_status.target_url }}
+          REPLAY_PLAYWRIGHT_FIXTURE: 1
       - name: Upload replays
         if: ${{ always() }}
         uses: replayio/action-upload@v0.5.1
