@@ -22,6 +22,7 @@ jobs:
         env:
           BASE_URL: ${{ github.event.deployment_status.target_url }}
           REPLAY_PLAYWRIGHT_FIXTURE: 1
+          DEBUG: replay:*
       - name: Upload replays
         if: ${{ always() }}
         uses: replayio/action-upload@v0.5.1
