@@ -76,6 +76,7 @@ POSTGRES_URL_NON_POOLING="postgresql://<YOUR_NAME>:<YOUR_PASS>@localhost:5432/<D
 
 3. Rename `<YOUR_NAME>`, `<YOUR_PASS>`, `<DB_NAME>` in both `docker-compose.yml` file and `.env`. Since we are in local development, these can be set to anything you want. You can also change the default `5432` port.
 4. Run `docker-compose up -d`
-5. Run `npm run dev`
+5. Run `npx prisma migrate dev --name init` to initialize database
+6. Run `npm run dev`
 
 If anything goes wrong, don’t hesitate to open an issue, or reach out to us on [Replay.io Discord](https://discord.gg/replayio)
