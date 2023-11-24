@@ -13,6 +13,7 @@ jobs:
           command: npx playwright test --project replay-chromium --reporter=@replayio/playwright/reporter,line
           environment:
             REPLAY_API_KEY: ${REPLAY_API_KEY}
+            BASE_URL: "https://things-app-react.vercel.app/"
 workflows:
   cypress-test-workflow:
     jobs:
