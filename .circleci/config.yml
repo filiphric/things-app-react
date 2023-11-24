@@ -1,0 +1,20 @@
+version: 2.1
+jobs:
+  replay-upload:
+    docker:
+      - image: mcr.microsoft.com/playwright:v1.40.0-jammy
+    steps:
+      - checkout
+      - run:
+          name: "Install Dependencies"
+          command: "npm ci"
+      - run:
+          name: "Run Cypress Tests"
+          command: npx playwright test --project replay-chromium --reporter=@replayio/playwright/reporter,line
+          environment:
+            REPLAY_API_KEY: ${REPLAY_API_KEY}
+workflows:
+  cypress-test-workflow:
+    jobs:
+      - replay-upload:
+          context: replayable
