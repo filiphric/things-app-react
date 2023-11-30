@@ -8,7 +8,7 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   reporter: [["@replayio/playwright/reporter", {
     upload: true, apiKey: REPLAY_API_KEY
-  }],["line"]],
+  }]],
   use: {
     baseURL: CI ? BASE_URL : "http://localhost:3000",
     trace: "on-first-retry",
