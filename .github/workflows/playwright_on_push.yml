@@ -14,3 +14,5 @@ jobs:
         run: npx playwright install --with-deps
       - name: Run Playwright tests
         run: npx playwright test
+        env:
+          BASE_URL: "https://things-app-react.vercel.app/"
