@@ -1,13 +1,15 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { defineConfig } from "cypress";
 import { resetDbTask } from './cypress/tasks/resetDb';
-import replay from "@replayio/cypress";
+import { plugin as replayPlugin } from "@replayio/cypress";
 
 export default defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
       on('task', { resetDbTask })
-      replay(on, config);
+      replayPlugin(on, config, {
+        apiKey: process.env.REPLAY_API_KEY,
+      });
 
       return config
     },
