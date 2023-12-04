@@ -12,7 +12,7 @@ jobs:
         run: npm ci
       - uses: replayio/action-playwright@v0.6.1
         with:
-          api-key: ${{ secrets.REPLAY_API_KEY }}
+          api-key: ${{ secrets.RECORD_REPLAY_API_KEY }}
           project: replay-chromium
         env:
           BASE_URL: "https://things-app-react.vercel.app/"
