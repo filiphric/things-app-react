@@ -10,7 +10,8 @@ jobs:
       - uses: actions/checkout@v3
       - name: Install dependencies
         run: npm ci
-      - name: Run Playwright tests
-        run: npx playwright test
+      - uses: replayio/action-playwright@v0.6.1
+        with:
+          api-key: ${{ secrets.REPLAY_API_KEY }}
         env:
           BASE_URL: "https://things-app-react.vercel.app/"
