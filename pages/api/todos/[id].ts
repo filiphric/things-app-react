@@ -7,7 +7,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  console.log(req.query.id);
   const id = req.query.id as string;
   if (req.method === "DELETE") {
     const todo = await prisma.todo.delete({

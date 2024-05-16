@@ -1,6 +1,7 @@
 import { TodoList } from "../src/components/TodoList";
 import { AddTodo } from "../src/components/AddTodo";
 import { Inbox } from "../src/components/icons/Inbox";
+import { Spinner } from "../src/components/Spinner";
 import { useAtom } from "jotai";
 import {
   todosAtom,
@@ -32,14 +33,17 @@ export default function Home() {
         <header className="mb-6">
           <h1 className="text-2xl font-bold text-gray-900">
             <Inbox className="fill-blue-500 inline-block mb-1 mr-2" />
-            Inbox
+            Todos
           </h1>
         </header>
         <div className="border-b border-gray-200 mb-6">
-          {" "}
-          <AddTodo />{" "}
+          <AddTodo />
         </div>
-        <TodoList todos={todos} deleteTodo={deleteTodo} />
+        {!loaded ? (
+          <Spinner />
+        ) : (
+          <TodoList todos={todos} deleteTodo={deleteTodo} />
+        )}
       </div>
     </section>
   );
