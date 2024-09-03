@@ -13,12 +13,6 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
-          browser: replay-chromium
           start: npm run dev
         env:
           CYPRESS_BASE_URL: ${{ github.event.deployment_status.target_url }}
-      - name: Upload replays
-        if: always()
-        uses: replayio/action-upload@v0.5.1
-        with:
-          api-key: ${{ secrets.RECORD_REPLAY_API_KEY }}

@@ -2,6 +2,7 @@
   "name": "things-app-react",
   "private": true,
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -10,7 +11,7 @@
     "postinstall": "prisma db pull && prisma generate",
     "playwright:ui": "playwright test --ui",
     "test": "cypress run",
-    "test:replay": "cypress run --browser replay-chromium"
+    "db:cleanup": "ts-node --esm --project tsconfig.scripts.json scripts/cleanupDb.ts"
   },
   "dependencies": {
     "@prisma/client": "^4.16.1",
@@ -31,8 +32,6 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.40.0",
-    "@replayio/cypress": "^1.0.7",
-    "@replayio/playwright": "^1.0.17",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^5.59.0",
@@ -46,6 +45,7 @@
     "postcss": "^8.4.24",
     "prisma": "^4.16.1",
     "tailwindcss": "^3.3.2",
+    "ts-node": "^10.9.2",
     "typescript": "^5.0.2",
     "vite": "^4.3.9"
   }

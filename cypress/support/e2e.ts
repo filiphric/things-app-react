@@ -1,1 +1,0 @@
-require('@replayio/cypress/support');
