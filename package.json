@@ -8,9 +8,10 @@
     "start": "next start",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "postinstall": "prisma db pull && prisma generate",
-    "playwright:ui": "playwright test --ui",
-    "test": "cypress run",
-    "db:cleanup": "ts-node --esm --project tsconfig.scripts.json scripts/cleanupDb.ts"
+    "pw:ui": "playwright test --ui",
+    "pw:test": "playwright test",
+    "cy:run": "cypress run",
+    "cy:open": "cypress open"
   },
   "dependencies": {
     "@prisma/client": "^4.16.1",
